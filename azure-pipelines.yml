@@ -53,6 +53,6 @@ steps:
   parameters: 
     buildConfiguration: 'Release'
 
-- task: DotNetCoreCli@2
+- task: PublishBuildArtifacts@1
   displayName: 'publish build artificacte'
   condition: 'succeeded()'
