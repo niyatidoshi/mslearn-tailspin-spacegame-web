@@ -45,21 +45,13 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
-- task: DotNetCoreCli@2
-  displayName: "Build dependencies"
-  inputs: 
-    command: 'build' 
-    arguments: '--no-restore --configuration $(buildConfiguration)'
-    projects: '**/*.csproj'
+- template: template/build.yml
+  parameters: 
+    buildConfiguration: 'Debug'
 
-- task: DotNetCoreCli@2
-  displayName: "Publish project"
-  inputs:
-    command: 'publish'
-    arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
-    projects: '**/*.csproj'
-    publishWebProjects: false
-    zipAfterPublish: true
+- template: template/build.yml
+  parameters: 
+    buildConfiguration: 'Release'
 
 - task: DotNetCoreCli@2
   displayName: 'publish build artificacte'
